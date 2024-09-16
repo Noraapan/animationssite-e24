@@ -13,13 +13,13 @@ const images = await Astro.glob("/src/assets/images/galleri/*").then(files => {
 ---
 <MainLayout title="Titel">
 		<section class="grid md:grid-cols-2 border-8 border-black lg:mt-32">		
-			<div class="">
-				<Image src={musik1} alt="Musik som levevej" class="" />
+			<div class="overflow-hidden"> <!--bild scalar inte utanfør den svarta bordern -->
+				<Image src={musik1} alt="Musik som levevej" class="transition-all scale-up-center" />
 			</div>
 			<div class="text-4xl p-8 grid content-center bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90%">					
-				<p class="pb-8">Musik som levevej</p>
+				<p class="pb-8 animate-pulse animate__animated animate__bounceIn">Musik som levevej</p>
 				<p class="mb-8 text-2xl">Et kursus i at blive stinkende rig som musiker - af musiker og multimillionær Jørgen Henning</p>
-				<Link variant="primary" size="medium" href="#tilmelding">Tilmeld dig til kurset!</Link>
+				<div class="minegenanimation"><Link variant="primary" size="medium" href="#tilmelding">Tilmeld dig til kurset!</Link></div>
 			</div>
 		</section>
 
@@ -39,13 +39,13 @@ const images = await Astro.glob("/src/assets/images/galleri/*").then(files => {
 				</ul>
 			</article>
 		</section>
-		
+		<div class="animate__animated animate__fadeIn mitelement">
 		<section class="mt-32 grid lg:grid-cols-3 mx-auto gap-4 items-center">
-			<div><Image src={musik2} format="webp" alt="foto" class="my-class" /></div>
-			<div><Image src={musik3} format="webp" alt="foto" class="my-class" /></div>
-			<div><Image src={musik4} format="webp" alt="foto" class="my-class" /></div>
+			<div><Image src={musik2} format="webp" alt="foto" class="my-class transition ease-in-out hover:skew-x-12" /></div>
+			<div><Image src={musik3} format="webp" alt="foto" class="my-class transition ease-in-out hover:scale-150" /></div>
+			<div><Image src={musik4} format="webp" alt="foto" class="my-class transition ease-in-out hover:skew-y-12" /></div>
 		</section>
-
+</div>
 		<section class="mt-32">
 			<h2 class="text-4xl font-bold">Kursisterne siger</h2>
 			<div class="grid grid-cols-1 lg:grid-cols-3 mx-auto gap-4">
@@ -100,7 +100,7 @@ const images = await Astro.glob("/src/assets/images/galleri/*").then(files => {
 			</article>
 		</section>
 
-		<section id="inspiration" class="mt-32">
+		<section id="inspiration" class="mt-32 animate__animated animate__fadeIn">
 			<h2 class="text-4xl font-bold">Inspiration fra tidligere kurser</h2>
 			<div class="columns-2 lg:columns-4">
 			{
@@ -168,10 +168,25 @@ const images = await Astro.glob("/src/assets/images/galleri/*").then(files => {
 				<label for="nyhedsbrev">Ja tak til nyhedsbreve og tilbud</label>
 			</div>
 
-			<div class="flex justify-end">
+			<div class="flex justify-end hover:flip-horizontal-bottom">
 				<Button variant="primary" size="medium">Til betaling</Button>
 			</div>
 		</form>
 	</section>
 	<!-- tailwind form slut -->
 </MainLayout>
+
+<style>
+	.minegenanimation:hover{
+animation: fadeIn;
+animation-duration: 5s;
+	}
+</style>
+
+<script>
+	import { inView } from "motion";
+	const inviewelement = document.querySelector(".mitelement");
+	inView(inviewelement, () => {
+	inviewelement.classList.add("animate__animated", "animate__bounseInDown")
+	})
+</script>
